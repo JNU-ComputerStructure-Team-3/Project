@@ -1,0 +1,24 @@
+package DectoBi;
+import java.util.Scanner;
+import java.util.Stack;
+public class DectoBin {
+	public static void main(String[] args)
+	{
+		Scanner in = new Scanner(System.in);
+		Stack<Integer> stack = new Stack<Integer>();
+		System.out.println("Enter the decimal to be converted: ");
+		int num=in.nextInt();
+		while (num!=0)
+		{
+			int d=num%2;
+			stack.push(d);
+			num/=2;
+		}
+		System.out.print("The binary of the given numeber is: ");
+		while (!(stack.isEmpty() ))
+		{
+			System.out.print(stack.pop());
+		}
+	
+	}
+}
