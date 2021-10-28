@@ -1,0 +1,71 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.Color;
+import java.awt.Window.Type;
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.DropMode;
+import javax.swing.JList;
+import java.awt.Button;
+
+public class makeJframe extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					makeJframe frame = new makeJframe();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public makeJframe() {
+		setFont(new Font("Agency FB", Font.PLAIN, 16));
+		setType(Type.POPUP);
+		setTitle("\uC785\uB825\uCC3D");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 571, 460);
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 255, 204));
+		contentPane.setForeground(new Color(176, 224, 230));
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(new BorderLayout(0, 0));
+		
+		textField = new JTextField();
+		textField.setToolTipText("");
+		textField.setForeground(new Color(0, 0, 0));
+		textField.setEditable(false);
+		textField.setBackground(new Color(255, 255, 153));
+		textField.setFont(new Font("함초롬돋움", Font.BOLD, 14));
+		textField.setHorizontalAlignment(SwingConstants.CENTER);
+		textField.setText("\uCEF4\uD4E8\uD130\uAD6C\uC870 3\uC870 - ComputerStructure");
+		contentPane.add(textField, BorderLayout.NORTH);
+		textField.setColumns(10);
+		
+		Button button = new Button("\uC2E4\uD589\uD558\uAE30");
+		button.setForeground(new Color(0, 0, 0));
+		button.setFont(new Font("Dialog", Font.BOLD, 15));
+		button.setActionCommand("buttonCheck");
+		contentPane.add(button, BorderLayout.SOUTH);
+	}
+
+}
