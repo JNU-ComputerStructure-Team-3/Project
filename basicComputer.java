@@ -11,8 +11,12 @@ public class basicComputer extends CPU {
 
         PC = origin_Address; // PC에 값 저장. 여기 까지가 ORG 0
 
-        /* 메모리에 명령어를 일단 저장한다. */
-
+        /*
+            메모리에 명령어를 일단 저장한다. 
+            명령어를 적고, 해당 명령어를 이진수로 바꾸는 메소드 필요.
+            바꾼 이진수는 memory 번지 0 부터 저장하는 메소드 필요.
+         */
+        
         // 기본 프로그램 시작
 
         while (!halt_Temp) {
@@ -51,10 +55,10 @@ public class basicComputer extends CPU {
         incre_SC();
         // T2 : decode 과정
         // AR <- IR 과정이 들어가야함
-        // I <- IR 과정 들어가야함
+
         // IR 을 Decode하는 함수 넣기 -> d_Seven_flag 의 값을 설정하는 과정이 있어야한다.
         System.out.println("Decode");
-        System.out.printf("T%d : AR <- IR(0-11), decode IR(12-14), I <- IR(15) ", SC)
+        System.out.printf("T%d : AR <- IR(0-11), decode IR(12-14), I <- IR(15) ", SC);
         
         // T3 : 레지스터 명령 or I/O 명령
         if (d_Seven_flag == true) {
@@ -68,6 +72,7 @@ public class basicComputer extends CPU {
     }
 
     // 순차 카운터의 값을 하나 증가 시키는 과정
+
     public static void incre_SC() {
         SC = (byte) ((int) SC + 1);
     }
