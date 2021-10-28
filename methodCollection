@@ -71,12 +71,9 @@ public void inputDataOpcode(String symbol) {
 }
 	
 
-public void pseudocode(String pseudoSymbol, String addressSymbol, String hexaAddress) {
+public void pseudocode() {
 	
 }
-
-
-
 
 
 }
