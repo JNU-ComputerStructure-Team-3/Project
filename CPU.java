@@ -16,7 +16,7 @@ public abstract class CPU {
     protected static byte R; // interrupt code
     protected static byte IEN; // enable code
 
-    public void CPU() {
+    public static void CPU() {
         // 메모리 생성
         MEMORY = new short[4096];
         // 레지스터 생성
@@ -25,17 +25,4 @@ public abstract class CPU {
         TR = 0;
         AC = 0;
     }
-
-    // 메모리에 데이터를 집어넣는 함수
-    // 매개변수 (배열의 위치, 값)
-    public abstract void inputData(int position, short data);
-
-    // 명령어 분리 (opcode 와 address)
-    public abstract void decodeInstruction(short instruction);
-
-    // opcode 해독
-    public abstract void decodeOpcode();
-
-    // 명령어 판별
-    public abstract void readInstruction();
 }
