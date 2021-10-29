@@ -1,5 +1,5 @@
 public class hexToBIn {
-	final static String HEX = "FFE9012";
+	final static String HEX = "FF12";
 
 	public static void main(String[] args) {
 		//1. Srting -> ShortData 출력
