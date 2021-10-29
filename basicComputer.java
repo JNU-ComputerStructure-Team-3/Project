@@ -8,12 +8,11 @@ public class basicComputer extends CPU {
         PC = origin_Address; // PC에 값 저장. 여기 까지가 ORG 0
 
         /*
-         * 메모리에 명령어를 일단 저장한다. 명령어를 적고, 해당 명령어를 이진수로 바꾸는 메소드 필요. 바꾼 이진수는 memory 번지 0 부터
-         * 저장하는 메소드 필요.
+         * first - pass 메모리에 명령어를 일단 저장한다. 명령어를 적고, 해당 명령어를 이진수로 바꾸는 메소드 필요. 바꾼 이진수는
+         * memory 번지 0 부터 저장하는 메소드 필요.
          */
 
         // 기본 프로그램 시작
-
         // start SC <- 0 , IEN <- 1 , R <- 0
         SC = 0;
         R = 0;
