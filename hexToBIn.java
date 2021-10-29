@@ -2,59 +2,61 @@ public class hexToBIn {
 	final static String HEX = "FFE9012";
 
 	public static void main(String[] args) {
+		//1. Srting -> ShortData ì¶œë ¥
+		System.out.println("Short\n"+(int)hexToBin(HEX));
 		
-		//2. String -> StirngArray Ãâ·Â
+			//1-1. ìë°” ë‚´ì¥ ê°ì²´ë¥¼ ì´ìš©í•œ í•œì¤„ì½”ë“œ. ê²°ê³¼ê°’ì€ ë™ì¼í•©ë‹ˆë‹¤.
+		short bin = (short)Integer.parseInt(HEX, 16);
+		System.out.println("parseInt : "+bin);
+		
+		//2. String -> StirngArray ì¶œë ¥
+		System.out.println("SrtingArray");
 		for (int i= 0; i<HEX.length();i++) {
 			System.out.print(hexToBin_StringArray(HEX)[i]+" ");
 		}
 		System.out.println();
 		
-		//3. String -> IntArray Ãâ·Â
+		//3. String -> IntArray ì¶œë ¥
+		System.out.println("IntArray");
 		for (int i = 0; i<HEX.length()*4;i++) {
 			System.out.print(hexToBin_IntArray(HEX)[i] + " ");
 		}
 		System.out.println();
 		
-		System.out.println(hexToBin(HEX));
+
+		
+
 		}
 	
 	
-	
-	// 1. HexString -> BinString
-	public static String hexToBin(String hex) {
-		int hexLen = hex.length();
-		int bit4 = 0;
-		int bit1, count, tempHex;
-		int[] temp = new int[4];
-		String binString = "";
+
+	// 1. HexString -> short Data
+	public static Short hexToBin(String hex) {
+		int bit4 = hex.length()-1;
+		short tempHex; // 16ì§„ìˆ˜ í•œìë¦¬ì— ëŒ€í•œ ASCII ë³€í™˜ê°’
+		short temp = 1;// 16ì§„ìˆ˜ ìë¦¿ìˆ˜
+		short bin = 0;
 		
-		// 4ºñÆ®¾¿ ³ª´²¼­ 2Áø¼ö·Î º¯È¯
-		while (bit4<hexLen) { // Hex -> 4bit
-			bit1 = count = 0;
-			tempHex = (int)hex.charAt(bit4); // char -> int
+		// 4ë¹„íŠ¸ì”© ë‚˜ëˆ ì„œ 2ì§„ìˆ˜ë¡œ ë³€í™˜
+		while (bit4>=0) { // Hex -> 4bit
+			tempHex = (short)hex.charAt(bit4); // char -> int
 			
 			// 1. ASCII -> Hex
 			if (tempHex <58 && tempHex>47) tempHex -= 48;
 			else if (tempHex > 64 && tempHex < 71) tempHex -= 55;
 			else break;
 			
-			// 2. Hex -> BinArray
-			while (bit1<4) { // 4bit -> 1bit
-				temp[3-bit1] = tempHex%2;
-				tempHex /= 2;
-				bit1 ++;
-			}
+			// 2. Hex -> short Data(ì‹­ì§„ìˆ˜)
+			bin += temp*tempHex;
 			
-			// 3. BinIntArray -> BinString
-			while (count<4) {
-				binString += Integer.toString(temp[count]);// º¯È¯µÈ 2Áø¼ö¸¦ StringÀ¸·Î º¯È¯
-				temp[count] = 0;
-				count ++;
-			}
-			bit4 ++;
+			// 16ì§„ìˆ˜ ìë¦¿ìˆ˜ ê³„ì‚°
+			temp*=16;
+			
+			bit4--;
 		}
-		return binString;
+		return bin;
 	}
+	
 	
 	// 2. HexString -> BinStringArray
 	public static String[] hexToBin_StringArray(String hex) {
@@ -65,7 +67,7 @@ public class hexToBIn {
 		String[] binStringArray = new String[hexLen];
 		String binString;
 		
-		// 4ºñÆ®¾¿ ³ª´²¼­ 2Áø¼ö·Î º¯È¯
+		// 4ë¹„íŠ¸ì”© ë‚˜ëˆ ì„œ 2ì§„ìˆ˜ë¡œ ë³€í™˜
 		while (bit4<hexLen) { // Hex -> 4bit
 			bit1 = count = 0;
 			tempHex = (int)hex.charAt(bit4); // char -> int
@@ -85,7 +87,7 @@ public class hexToBIn {
 			
 			// 3. BinIntArray -> BinString
 			while (count<4) {
-				binString += Integer.toString(temp[count]);// º¯È¯µÈ 2Áø¼ö¸¦ StringÀ¸·Î º¯È¯
+				binString += Integer.toString(temp[count]);// ë³€í™˜ëœ 2ì§„ìˆ˜ë¥¼ Stringìœ¼ë¡œ ë³€í™˜
 				temp[count] = 0;
 				count ++;
 			}
@@ -105,7 +107,7 @@ public class hexToBIn {
 		int[] temp = new int[4*hexLen];
 		String binString = "";
 		
-		// 4ºñÆ®¾¿ ³ª´²¼­ 2Áø¼ö·Î º¯È¯
+		// 4ë¹„íŠ¸ì”© ë‚˜ëˆ ì„œ 2ì§„ìˆ˜ë¡œ ë³€í™˜
 		while (bit4<hexLen) { // Hex -> 4bit
 			bit1 = count = 0;
 			tempHex = (int)hex.charAt(bit4); // char -> int
