@@ -23,6 +23,8 @@ import javax.swing.SpringLayout;
 import javax.swing.JLabel;
 import java.awt.Panel;
 import javax.swing.JEditorPane;
+import javax.swing.JCheckBox;
+import javax.swing.JTextPane;
 
 public class makeJframe extends JFrame {
 
@@ -82,38 +84,23 @@ public class makeJframe extends JFrame {
 		button.setActionCommand("buttonCheck");
 		contentPane.add(button);
 		
-		JEditorPane editorPane = new JEditorPane();
-		editorPane.setFont(new Font("굴림", Font.PLAIN, 14));
-		editorPane.setBackground(new Color(255, 255, 255));
-		editorPane.setBounds(80, 316, 109, 25);
-		contentPane.add(editorPane);
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(119, 136, 153));
-		panel.setBounds(74, 310, 121, 36);
-		contentPane.add(panel);
-		
 		JEditorPane editorPane_1 = new JEditorPane();
-		editorPane_1.setFont(new Font("굴림", Font.PLAIN, 14));
+		editorPane_1.setFont(new Font("나눔고딕", Font.BOLD, 15));
 		editorPane_1.setBackground(Color.WHITE);
-		editorPane_1.setBounds(315, 316, 109, 25);
+		editorPane_1.setBounds(245, 441, 212, 25);
 		contentPane.add(editorPane_1);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(119, 136, 153));
-		panel_1.setBounds(309, 310, 121, 36);
+		panel_1.setBounds(239, 435, 225, 36);
 		contentPane.add(panel_1);
 		
-		JEditorPane editorPane_2 = new JEditorPane();
-		editorPane_2.setFont(new Font("굴림", Font.PLAIN, 14));
-		editorPane_2.setBackground(Color.WHITE);
-		editorPane_2.setBounds(551, 316, 109, 25);
-		contentPane.add(editorPane_2);
-		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(new Color(119, 136, 153));
-		panel_2.setBounds(545, 310, 121, 36);
-		contentPane.add(panel_2);
+		JTextPane textPane = new JTextPane();
+		textPane.setBackground(new Color(255, 255, 204));
+		textPane.setFont(new Font("굴림", Font.PLAIN, 15));
+		textPane.setText("코드를 입력하세요 :");
+		textPane.setBounds(87, 441, 146, 25);
+		contentPane.add(textPane);
 
 	}
 }
