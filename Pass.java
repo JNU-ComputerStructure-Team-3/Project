@@ -44,8 +44,7 @@ public class Pass {
                     memory[LC++] = (short)temp;
                 }
                 else if(commandLine.substring(targetSymbolicIdx + 1, targetSpaceIdx).equals("HEX")){
-                    int temp = Integer.parseInt(commandLine.substring(targetSpaceIdx + 1));
-                    
+ㄴ
                 }
 
             }
