@@ -1,0 +1,91 @@
+  case (0):
+//                AND
+            	//T4
+            	if (CPU.SC == 4) {
+            			DR = MEMORY[AR]; 
+            			System.out.printf("D0T%d : DR <- M[AR]%n",CPU.SC);
+            			print();
+            			CPU.SC++;
+            	}
+            	else {
+            			System.out.println("SC 값 에러");
+            			break;
+            	}
+            
+            	//T5
+            	if (CPU.SC == 5) {
+            			AC = (short)(AC & DR); 
+            			System.out.printf("D0T%d : AC <- AC & DR, SC <- 0%n",CPU.SC);
+            			print();
+            	}
+            	else {
+            			System.out.println("SC 값 에러");
+            			break;
+            	}
+                break;
+                
+            case (1):
+//                ADD
+            	//T4
+            	if (CPU.SC == 4) {
+            			DR = MEMORY[AR]; 
+            			System.out.printf("D1T%d : DR <- M[AR]%n",CPU.SC);
+            			print();
+            			CPU.SC++;
+            	}
+            	else {
+            			System.out.println("SC 값 에러");
+            			break;
+            	}
+            	
+            	//T5	
+            	if (CPU.SC == 5) {
+            			AC = AC + DR; 
+            			System.out.printf("D1T%d : AC <- AC + DR, SC <- 0%n",CPU.SC);
+            			print();
+            	}
+            	else {
+            			System.out.println("SC 값 에러");
+            			break;
+            	}
+                break;
+                
+            case (2):
+//                LDA
+            	//T4
+            	if (CPU.SC == 4) {
+            			DR = MEMORY[AR]; 
+            			System.out.printf("D2T%d : DR <- M[AR]%n",CPU.SC);
+            			print();
+            			CPU.SC++;
+            	}
+            	else {
+            			System.out.println("SC 값 에러");
+            			break;
+            	}
+            			
+            	//T5
+            	if (CPU.SC == 5) {
+            			AC = DR;
+            			System.out.printf("D2T%d : AC <- DR, SC <- 0%n",CPU.SC);
+            			print();
+            	}
+            	else {
+            			System.out.println("SC 값 에러");
+            			break;
+            	}
+                break;
+                
+            case (3):
+//                STA
+            	//T4
+            	if (CPU.SC == 4) {
+            			MEMORY[AR] = AC;
+            			System.out.printf("D3T%d : M[AR] <- AC, SC<- 0",CPU.SC);
+            			print();
+            	}
+            	else {
+            			System.out.println("SC 값 에러");
+            			break;
+            	}
+                break;
