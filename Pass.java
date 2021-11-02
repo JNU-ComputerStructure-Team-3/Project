@@ -13,6 +13,10 @@ public class Pass {
         for (Map.Entry<String, Integer> element : sat.entrySet()) {
             System.out.println(element.getKey() + " : " + element.getValue());
         }
+        for(int i=0; i<10; i++){
+            System.out.println("Memory Idx:" + i + " Value:" + memory[i]);
+        }
+
     }
 
     public static void firstPass(short[] memory, HashMap<String, Integer> sat, int LC) throws IOException {
@@ -34,7 +38,16 @@ public class Pass {
 
             // line of code have Labels
             if(targetSymbolicIdx != -1){
-                sat.put(commandLine.substring(0,targetSymbolicIdx), LC++);
+                sat.put(commandLine.substring(0,targetSymbolicIdx), LC);
+                if(commandLine.substring(targetSymbolicIdx + 1, targetSpaceIdx).equals("DEC")){
+                    int temp = Integer.parseInt(commandLine.substring(targetSpaceIdx + 1));
+                    memory[LC++] = (short)temp;
+                }
+                else if(commandLine.substring(targetSymbolicIdx + 1, targetSpaceIdx).equals("HEX")){
+                    int temp = Integer.parseInt(commandLine.substring(targetSpaceIdx + 1));
+                    
+                }
+
             }
             // it's doesn't have labels
             else {
@@ -54,7 +67,7 @@ public class Pass {
     }
 
 
-    public static void secondPass(){
+    public static void secondPass(short[] memory, HashMap<String, Integer> sat, int LC) {
 
     }
 }
