@@ -13,7 +13,7 @@ public abstract class CPU {
     protected static byte INPR; // 입력 - 입출력 장치로부터 8비트 문자 정보 송수신 (8)
     protected static byte OUTR; // 출력 - 입출력. (8)
     protected static byte SC; // 순차 카운터
-    protected static byte I; // 간접주소 enable code
+    protected static boolean I; // 간접주소 enable code
     protected static byte R; // interrupt code
     protected static byte IEN; // enable code
 
