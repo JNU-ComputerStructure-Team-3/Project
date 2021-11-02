@@ -34,35 +34,35 @@ public class Main extends CPU {
         System.out.printf("T%d : AR <- PC %n", SC);
         AR = PC;
         incre_SC();
-        // T1 : fetch °úÁ¤
+        // T1 : fetch ê³¼ì •
         System.out.printf("T%d : IR <- M[AR], PC <- PC + 1 %n", SC);
 
-        //I °¡ ÀÖÀ»¶§ +8
+        //I ê°€ ìˆì„ë•Œ +8
 
 
         IR = MEMORY[AR];
         System.out.println(IR);
         PC = (byte) (PC + 1);
         incre_SC();
-        // T2 : decode °úÁ¤
+        // T2 : decode ê³¼ì •
 
 
 
-        // AR <- IR °úÁ¤ÀÌ µé¾î°¡¾ßÇÔ
+        // AR <- IR ê³¼ì •ì´ ë“¤ì–´ê°€ì•¼í•¨
         AR = IR;
-        // IR À» DecodeÇÏ´Â ÇÔ¼ö ³Ö±â -> d_Seven_flag ÀÇ °ªÀ» ¼³Á¤ÇÏ´Â °úÁ¤ÀÌ ÀÖ¾î¾ßÇÑ´Ù.
+        // IR ì„ Decodeí•˜ëŠ” í•¨ìˆ˜ ë„£ê¸° -> d_Seven_flag ì˜ ê°’ì„ ì„¤ì •í•˜ëŠ” ê³¼ì •ì´ ìˆì–´ì•¼í•œë‹¤.
         System.out.println("Decode");
         System.out.printf("T%d : AR <- IR(0-11), decode IR(12-14), I <- IR(15)%n", SC);
-        I = true; // test code ÀÓ.
+        I = true; // test code ì„.
         incre_SC();
 
         boolean B_Flag = (!d_Seven_flag && I);
-        // T3: ¸í·É¾î Á¾·ùÀÇ °áÁ¤ -> Ã¥ 111p
-        // ÀÓÀÇ·Î flag ¸¦ ¸¸µé¾î¼­ T4¿¡¼­ ¸í·É¾îÀÇ Á¾·ù¸¦ ÆÇº°ÇÒ ¼ö ÀÖ°Ô ¾Ë·Á ÁÖ¾î¾ß ÇÑ´Ù.
+        // T3: ëª…ë ¹ì–´ ì¢…ë¥˜ì˜ ê²°ì • -> ì±… 111p
+        // ì„ì˜ë¡œ flag ë¥¼ ë§Œë“¤ì–´ì„œ T4ì—ì„œ ëª…ë ¹ì–´ì˜ ì¢…ë¥˜ë¥¼ íŒë³„í•  ìˆ˜ ìˆê²Œ ì•Œë ¤ ì£¼ì–´ì•¼ í•œë‹¤.
         if (!d_Seven_flag && I == true) {
             AR = MEMORY[AR];
             System.out.printf("T%d : AR <-[AR]%n", SC);
-            incre_SC();/* MRI ¸í·É¾îÁß SC==4°¡ ÇÊ¿äÇÏ±â ¶§¹®¿¡ Ãß°¡ [½ÂÇö]*/
+            incre_SC();/* MRI ëª…ë ¹ì–´ì¤‘ SC==4ê°€ í•„ìš”í•˜ê¸° ë•Œë¬¸ì— ì¶”ê°€ [ìŠ¹í˜„]*/
         } else if (d_Seven_flag && I == true) {
             System.out.printf("T%d : I/O command%n", SC);
 
@@ -74,11 +74,13 @@ public class Main extends CPU {
 
         }
         
-        // T4 ¸í·É¾î ´Ü°è ½ÇÇà
+        print();
+        // T4 ëª…ë ¹ì–´ ë‹¨ê³„ ì‹¤í–‰
 
         if ((!d_Seven_flag && I == true) | (!d_Seven_flag && I == false)) {
             if (execute_Memory_Command(command, SC) == -1) {
 //                HLT
+            	SC = 0;
                 return -1;
             }
         } else {
@@ -90,7 +92,7 @@ public class Main extends CPU {
         }
 		return -1;
     }
-/* TEST¸¦ À§ÇØ¼­ ¸ğµç voidÇüÀÇ ¸Ş¼Òµå¸¦ intÇü½ÄÀ¸·Î ÀüÈ¯ÇÔ. [½ÂÇö]*/
+/* TESTë¥¼ ìœ„í•´ì„œ ëª¨ë“  voidí˜•ì˜ ë©”ì†Œë“œë¥¼ intí˜•ì‹ìœ¼ë¡œ ì „í™˜í•¨. [ìŠ¹í˜„]*/
     public static int execute_Memory_Command(short command, int SC) {
         switch ((int) (command / Math.pow(16,3) % 8)) {
 //          Memory-Reference
@@ -109,44 +111,83 @@ public class Main extends CPU {
             case (4):
             	//<BUN>          	
             	//T4
-            	PC = AR;
-        		System.out.printf("D4T%d : PC <- AR, SC <- 0%n", SC);
-        		print();
-            	SC = 0;
+
+            	if (CPU.SC == 4) {
+                	PC = AR;
+                	
+            		System.out.printf("D4T%d : PC <- AR, SC <- 0%n", CPU.SC);
+            		print();
+            	}
+            	else {
+            		System.out.println("SC ê°’ ì—ëŸ¬");
+            		break;
+            	}
+
                 break;
             case (5):
             	//<BSA>
             	//T4
-            	MEMORY[AR] = PC;
-            	AR ++;
-            	System.out.printf("D5T%d : M[AR] <- PC, AR <- AR + 1%n", SC);
-            	print();
-            	SC++;
+            	if (CPU.SC == 4) {
+                	MEMORY[AR] = PC;
+                	AR ++;
+                	System.out.printf("D5T%d : M[AR] <- PC, AR <- AR + 1%n", CPU.SC);
+                	print();
+                	CPU.SC++;
+            	}
+            	else {
+            		System.out.println("SC ê°’ ì—ëŸ¬");
+            		break;
+            	}
+
             	
             	//T5
-            	PC = AR;
-            	System.out.printf("D5T%d : PC<-AR, SC <- 0%n", SC);
-            	print();
-            	SC = 0;
+        		if (CPU.SC == 5) {
+        			PC = AR;
+                	System.out.printf("D5T%d : PC<-AR, SC <- 0%n", CPU.SC);
+                	print();
+        		}
+            	else {
+            		System.out.println("SC ê°’ ì—ëŸ¬");
+            		break;
+            	}
                 break;
             case (6):
             	//<ISZ>
             	//T4
-            	DR = MEMORY[AR];
-            	System.out.printf("D6T%d : DR <- M[AR]%n", SC);
-            	print();
-            	SC++;
+            	if (CPU.SC == 4) {
+            		DR = MEMORY[AR];
+                	System.out.printf("D6T%d : DR <- M[AR]%n", CPU.SC);
+                	print();
+                	CPU.SC++;
+            	}
+            	else {
+            		System.out.println("SC ê°’ ì—ëŸ¬");
+            		break;
+            	}
+            	
             	//T5
-            	DR++;
-            	System.out.printf("D6T%d : DR <- DR + 1%n", SC);
-            	print();
-            	SC++;
+            	if (CPU.SC == 5) {
+                	DR++;
+                	System.out.printf("D6T%d : DR <- DR + 1%n", CPU.SC);
+                	print();
+                	CPU.SC++;
+            	}
+            	else {
+            		System.out.println("SC ê°’ ì—ëŸ¬");
+            		break;
+            	}
+            	
             	//T6
-            	MEMORY[AR] = DR;
-            	if (DR == 0) PC++;
-            	System.out.printf("D6T%d : M[AR] <- DR, if (DR = 0) then (PC <- PC + 1), SC<-0%n", SC);
-            	print();
-            	SC = 0;
+            	if (CPU.SC == 6) {
+                	MEMORY[AR] = DR;
+                	if (DR == 0) PC++;
+                	System.out.printf("D6T%d : M[AR] <- DR, if (DR = 0) then (PC <- PC + 1), SC<-0%n", CPU.SC);
+                	print();
+            	}
+            	else {
+            		System.out.println("SC ê°’ ì—ëŸ¬");
+            		break;
+            	}
                 break;
         }
         return -1;
@@ -192,7 +233,7 @@ public class Main extends CPU {
                 return -1;
         }
         }
-    // ¼øÂ÷ Ä«¿îÅÍÀÇ °ªÀ» ÇÏ³ª Áõ°¡ ½ÃÅ°´Â °úÁ¤
+    // ìˆœì°¨ ì¹´ìš´í„°ì˜ ê°’ì„ í•˜ë‚˜ ì¦ê°€ ì‹œí‚¤ëŠ” ê³¼ì •
     public static void incre_SC(){
         SC = (byte) (SC + 1);
     }
