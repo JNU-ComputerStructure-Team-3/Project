@@ -30,6 +30,9 @@ public class makeJframe extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
 
 
 	public static void main(String[] args) {
@@ -84,23 +87,63 @@ public class makeJframe extends JFrame {
 		button.setActionCommand("buttonCheck");
 		contentPane.add(button);
 		
-		JEditorPane editorPane_1 = new JEditorPane();
-		editorPane_1.setFont(new Font("나눔고딕", Font.BOLD, 15));
-		editorPane_1.setBackground(Color.WHITE);
-		editorPane_1.setBounds(245, 441, 212, 25);
-		contentPane.add(editorPane_1);
-		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(119, 136, 153));
-		panel_1.setBounds(239, 435, 225, 36);
+		panel_1.setToolTipText("");
+		panel_1.setBackground(Color.LIGHT_GRAY);
+		panel_1.setBounds(52, 79, 156, 36);
 		contentPane.add(panel_1);
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setBackground(new Color(255, 255, 204));
-		textPane.setFont(new Font("굴림", Font.PLAIN, 15));
-		textPane.setText("코드를 입력하세요 :");
-		textPane.setBounds(87, 441, 146, 25);
-		contentPane.add(textPane);
+		textField_1 = new JTextField();
+		panel_1.add(textField_1);
+		textField_1.setToolTipText("");
+		textField_1.setText("\uCEF4\uD4E8\uD130\uAD6C\uC870 3\uC870 - ComputerStructure");
+		textField_1.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_1.setForeground(Color.BLACK);
+		textField_1.setFont(new Font("함초롬돋움", Font.BOLD, 14));
+		textField_1.setEditable(false);
+		textField_1.setColumns(10);
+		textField_1.setBackground(new Color(255, 255, 153));
+		
+		JTextPane txtpnT = new JTextPane();
+		txtpnT.setBounds(12, 79, 28, 36);
+		contentPane.add(txtpnT);
+		txtpnT.setBackground(new Color(255, 255, 204));
+		txtpnT.setFont(new Font("굴림", Font.PLAIN, 15));
+		txtpnT.setText("T1:");
+		
+		JPanel panel_1_1 = new JPanel();
+		panel_1_1.setToolTipText("");
+		panel_1_1.setBackground(Color.LIGHT_GRAY);
+		panel_1_1.setBounds(220, 79, 156, 36);
+		contentPane.add(panel_1_1);
+		
+		textField_2 = new JTextField();
+		textField_2.setToolTipText("");
+		textField_2.setText("\uCEF4\uD4E8\uD130\uAD6C\uC870 3\uC870 - ComputerStructure");
+		textField_2.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_2.setForeground(Color.BLACK);
+		textField_2.setFont(new Font("함초롬돋움", Font.BOLD, 14));
+		textField_2.setEditable(false);
+		textField_2.setColumns(10);
+		textField_2.setBackground(new Color(255, 255, 153));
+		panel_1_1.add(textField_2);
+		
+		JPanel panel_1_2 = new JPanel();
+		panel_1_2.setToolTipText("");
+		panel_1_2.setBackground(Color.LIGHT_GRAY);
+		panel_1_2.setBounds(388, 79, 156, 36);
+		contentPane.add(panel_1_2);
+		
+		textField_3 = new JTextField();
+		textField_3.setToolTipText("");
+		textField_3.setText("\uCEF4\uD4E8\uD130\uAD6C\uC870 3\uC870 - ComputerStructure");
+		textField_3.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_3.setForeground(Color.BLACK);
+		textField_3.setFont(new Font("함초롬돋움", Font.BOLD, 14));
+		textField_3.setEditable(false);
+		textField_3.setColumns(10);
+		textField_3.setBackground(new Color(255, 255, 153));
+		panel_1_2.add(textField_3);
 
 	}
 }
