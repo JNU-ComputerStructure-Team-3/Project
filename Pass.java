@@ -147,6 +147,7 @@ public class Pass {
                     MRI_flag = true;
                     break;
             }
+
             commandOperand = commandLine.substring(targetSpaceIdx + 1);
             String symbolAddress = sat.get(commandOperand);
             // if it's not symbolic
@@ -212,6 +213,30 @@ public class Pass {
                     break;
                 case "HLT":
                     temp = Integer.parseInt("7001", 16);
+                    memory[LC++] = (short) temp;
+                    break;
+                case "INP":
+                    temp = Integer.parseInt("F800", 16);
+                    memory[LC++] = (short) temp;
+                    break;
+                case "OUT":
+                    temp = Integer.parseInt("F400", 16);
+                    memory[LC++] = (short) temp;
+                    break;
+                case "SKI":
+                    temp = Integer.parseInt("F200", 16);
+                    memory[LC++] = (short) temp;
+                    break;
+                case "SKO":
+                    temp = Integer.parseInt("F100", 16);
+                    memory[LC++] = (short) temp;
+                    break;
+                case "ION":
+                    temp = Integer.parseInt("F080", 16);
+                    memory[LC++] = (short) temp;
+                    break;
+                case "IOF":
+                    temp = Integer.parseInt("F040", 16);
                     memory[LC++] = (short) temp;
                     break;
             }
