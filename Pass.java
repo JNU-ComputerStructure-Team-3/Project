@@ -14,11 +14,11 @@ public class Pass {
         int LC = 0;
         firstPass(memory, sat, LC, br);
         secondPass(memory, sat, LC, sbr);
-        
+
         for (Map.Entry<String, String> element : sat.entrySet()) {
             System.out.println(element.getKey() + " : " + element.getValue());
         }
-        for(int i=0; i<10; i++){
+        for(int i=0; i<200; i++){
             System.out.println("Memory Idx:" + i + " Value:" + Integer.toHexString(memory[i]));
         }
 
