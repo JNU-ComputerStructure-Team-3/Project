@@ -1,4 +1,5 @@
 
+
 //최상위 클래스
 //단 한개의 프로세서 레지스터를 갖는 컴퓨터
 public abstract class CPU {
