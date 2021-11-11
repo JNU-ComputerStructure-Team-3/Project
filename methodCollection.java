@@ -20,7 +20,6 @@ public void fetchT3() {
 public void inputDataHexacode(String symbol, String hexaCode) {
 	
 	//헥사코드를 사용하는 opcode
-	
 	//AND 0xxx 8xxx
 	//ADD 1xxx 9xxx
 	//LDA 2xxx Axxx
@@ -68,11 +67,8 @@ public void inputDataOpcode(String symbol) {
 	//ION F080
 	//IOF F040
 }
-	
-
 public void pseudocode() {
 	
 }
-
 
 }
