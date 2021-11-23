@@ -26,6 +26,7 @@ class basicComputer extends CPU {
         for (Map.Entry<String, String> element : sat.entrySet()) {
             System.out.println(element.getKey() + " : " + element.getValue());
         }
+
         show_Memory(origin_Address, origin_Address+30);
 
 
@@ -36,13 +37,14 @@ class basicComputer extends CPU {
         IEN = 1;
         PC = origin_Address ;
         while(true) {
-            if (instructionCycle(MEMORY[PC]) == -1) {
+            int flag = instructionCycle(MEMORY[PC]);
+            if (flag == -1) {
                 System.out.println("program exit.");
                 break;
             }
         }
 
-        show_Memory(origin_Address, origin_Address+50);
+        show_Memory(origin_Address, origin_Address+30);
 
     }
 
@@ -54,9 +56,8 @@ class basicComputer extends CPU {
 
 
 
-        /* instruction cycle */
         // T0 : fetch 과정
-        if(PC > 130) return -1; // 임시코드
+        /* instruction cycle */
         System.out.println("-----------------------------------------");
         System.out.printf("T%d : AR <- PC %n", SC++);
         AR = PC;

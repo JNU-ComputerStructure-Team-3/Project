@@ -130,6 +130,10 @@ public abstract class CPU {
                 continue;
             } else if(command.equals("END")){
                 return ;
+            } else if(command.equals("HEX")){
+                int temp = Integer.parseInt(commandLine.substring(targetSpaceIdx + 1), 16);
+                MEMORY[LC++] = (short)temp;
+                continue;
             }
 
             // MRI
@@ -169,12 +173,19 @@ public abstract class CPU {
                     break;
             }
 
-            commandOperand = commandLine.substring(targetSpaceIdx + 1);
-            String symbolAddress = sat.get(commandOperand);
+            String symbolAddress = null;
+            if(targetSpaceIdx == -1);
+            else {
+
+                if(targetSpaceIdx == targetSecondSpaceIdx) commandOperand = commandLine.substring(targetSpaceIdx + 1);
+                else commandOperand = commandLine.substring(targetSpaceIdx + 1, targetSecondSpaceIdx );
+
+                symbolAddress = sat.get(commandOperand);
+                }
+
             // if it's not symbolic
             if(symbolAddress == null && MRI_flag){
                 secondPassCommand = secondPassCommand + commandOperand;
-                System.out.println(commandLine + " " + secondPassCommand);
                 int temp = Integer.parseInt(secondPassCommand, 16);
                 MEMORY[LC++] = (short) temp;
                 continue;
