@@ -265,4 +265,8 @@ public abstract class CPU {
 
     }
 
+    public static void printRegister(){
+        System.out.printf("AR\tDR\tAC\tIR\tPC%n");
+        System.out.printf("0x" + Integer.toHexString(AR) + "\t 0x" + Integer.toHexString(DR) + "\t 0x" + Integer.toHexString(AC) + "\t 0x" + Integer.toHexString(IR) + "\t 0x" + Integer.toHexString(PC) + "\n");
+    }
 }

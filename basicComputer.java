@@ -16,8 +16,8 @@ class basicComputer extends CPU {
         HashMap<String, String> sat = new HashMap<String, String>();
         short origin_Address = 0; // 첫 프로그램이 시작하는 번지를 저장하는 변수
 
-        BufferedReader br = new BufferedReader(new FileReader("input_example.txt"));
-        BufferedReader sbr = new BufferedReader(new FileReader("input_example.txt"));
+        BufferedReader br = new BufferedReader(new FileReader("input_example"));
+        BufferedReader sbr = new BufferedReader(new FileReader("input_example"));
 
         int LC = 0;
         origin_Address = (short)firstPass(sat, LC, br);
@@ -43,6 +43,10 @@ class basicComputer extends CPU {
                 break;
             }
         }
+
+        for(int i=100; i<121; i++){
+            System.out.println("Memory Idx:" + i + " Value:" + Integer.toHexString(MEMORY[i]));
+        }
     }
 
     public static int instructionCycle(short operand) {
@@ -65,15 +69,15 @@ class basicComputer extends CPU {
         IR = MEMORY[AR];
         PC = (short) (PC + 1);
         System.out.println("IR : 0x" + Integer.toHexString(IR));
-        System.out.println("PC : " + PC);
+        System.out.println("PC : 0x" + Integer.toHexString(PC));
         // T2 : decode 과정
         // AR <- IR 과정이 들어가야함
         AR = (short)(IR & address_mask);
         System.out.println("Decode");
         System.out.printf("T%d : AR <- IR(0-11), decode IR(12-14), I <- IR(15)%n", SC);
-        System.out.println("AR :" + AR);
+        System.out.println("AR : 0x" + Integer.toHexString(AR));
         decode_opcode = (short)((IR & opcode_mask)>>>12);
-        System.out.println("opcode with Indirect code : " + Integer.toHexString(decode_opcode));
+        System.out.println("opcode with Indirect code : 0x" + Integer.toHexString(decode_opcode));
         incre_SC();
 
         // T3 단계.
@@ -115,6 +119,7 @@ class basicComputer extends CPU {
                 AC = (short)(AC & DR);
                 System.out.println("AC and DR :" + AC);
                 SC = 0;
+                printRegister();
                 break;
             case (1):
 //                ADD
@@ -127,6 +132,7 @@ class basicComputer extends CPU {
                 AC = (short) (AC + DR);
                 System.out.println("AC + DR :" + AC);
                 SC = 0;
+                printRegister();
                 break;
             case (2):
 //                LDA
@@ -138,6 +144,7 @@ class basicComputer extends CPU {
                 System.out.printf("T%d : AC <- DR, SC <- 0%n", SC);
                 System.out.println("AC : " + AC);
                 SC = 0;
+                printRegister();
                 break;
             case (3):
 //                STA
@@ -145,6 +152,7 @@ class basicComputer extends CPU {
                 MEMORY[AR] = AC;
                 System.out.printf("T%d : M[AR] <- AC, SC<- 0%n", SC);
                 SC = 0;
+                printRegister();
                 break;
             case (4):
                 //<BUN>
@@ -154,6 +162,7 @@ class basicComputer extends CPU {
                 System.out.printf("T%d : PC <- AR, SC <- 0%n", SC);
                 System.out.println("PC :" + PC);
                 SC = 0;
+                printRegister();
                 break;
             case (5):
                 //<BSA>
@@ -165,6 +174,7 @@ class basicComputer extends CPU {
                 PC = AR;
                 System.out.printf("T%d : PC<-AR, SC <- 0%n", SC);
                 SC = 0;
+                printRegister();
                 break;
             case (6):
                 //<ISZ>
@@ -179,6 +189,7 @@ class basicComputer extends CPU {
                 if (DR == 0) PC++;
                 System.out.printf("D6T%d : M[AR] <- DR, if (DR = 0) then (PC <- PC + 1), SC<-0%n", SC);
                 SC = 0;
+                printRegister();
                 break;
         }
         return 0;
@@ -193,6 +204,7 @@ class basicComputer extends CPU {
                 System.out.printf("T%drB11 : AC <- 0, SC <- 0 %n", SC);
                 AC = 0;
                 SC = 0;
+                printRegister();
                 break;
             case 0x7400:
 //                CLE
@@ -200,6 +212,7 @@ class basicComputer extends CPU {
                 System.out.printf("T%drB10 : E <- 0, SC <- 0 %n", SC);
                 E = 0;
                 SC = 0;
+                printRegister();
                 break;
             case 0x7200:
 //                CMA
@@ -207,12 +220,14 @@ class basicComputer extends CPU {
                 System.out.printf("T%drB9 : AC <- AC', SC <-0 %n", SC);
                 AC = (short) ~AC;
                 SC = 0;
+                printRegister();
                 break;
             case 0x7100:
 //                CME
                 System.out.println("CME");
-                System.out.printf("T%drB8 : E <- E', SC <- 0", SC);
+                System.out.printf("T%drB8 : E <- E', SC <- 0%n", SC);
                 E = (byte)(E*-1);
+                printRegister();
                 SC = 0;
                 break;
             case 0x7080:
@@ -229,6 +244,7 @@ class basicComputer extends CPU {
                     AC = AC_2;
                 }
                 SC = 0;
+                printRegister();
                 break;
             case 0x7040:
 //                CIL
@@ -243,6 +259,7 @@ class basicComputer extends CPU {
                     AC = AC_2;
                 }
                 SC = 0;
+                printRegister();
                 break;
             case 0x7020:
 //                INC
@@ -250,6 +267,7 @@ class basicComputer extends CPU {
                 System.out.printf("T%drB5 : AC <- AC + 1, SC <- 0 %n", SC);
                 AC += 1;
                 SC = 0;
+                printRegister();
                 break;
             case 0x7010:
 //                SPA
@@ -259,6 +277,7 @@ class basicComputer extends CPU {
                     PC = (short)(PC + 1);
                 }
                 SC = 0;
+                printRegister();
                 break;
             case 0x7008:
 //                SNA
@@ -268,6 +287,7 @@ class basicComputer extends CPU {
                     PC = (short)(PC + 1);
                 }
                 SC = 0;
+                printRegister();
                 break;
             case 0x7004:
 //                SZA
@@ -277,6 +297,7 @@ class basicComputer extends CPU {
                     PC = (short)(PC + 1);
                 }
                 SC = 0;
+                printRegister();
                 break;
             case 0x7002:
 //                SZE
@@ -285,12 +306,14 @@ class basicComputer extends CPU {
                 if(E == 0)
                     PC = (short) (PC + 1);
                 SC = 0;
+                printRegister();
                 break;
             case 0x7001:
 //                HLT
                 System.out.println("HLT");
                 System.out.printf("T%drB0 : HLT, S <- 0 %n", SC);
                 SC = 0;
+                printRegister();
                 return -1;
         }
         return 0;
