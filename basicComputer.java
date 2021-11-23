@@ -26,9 +26,7 @@ class basicComputer extends CPU {
         for (Map.Entry<String, String> element : sat.entrySet()) {
             System.out.println(element.getKey() + " : " + element.getValue());
         }
-        for(int i=100; i<121; i++){
-            System.out.println("Memory Idx:" + i + " Value:" + Integer.toHexString(MEMORY[i]));
-        }
+        show_Memory(origin_Address, origin_Address+30);
 
 
         // 기본 프로그램 시작
@@ -44,9 +42,8 @@ class basicComputer extends CPU {
             }
         }
 
-        for(int i=100; i<121; i++){
-            System.out.println("Memory Idx:" + i + " Value:" + Integer.toHexString(MEMORY[i]));
-        }
+        show_Memory(origin_Address, origin_Address+50);
+
     }
 
     public static int instructionCycle(short operand) {
@@ -322,5 +319,11 @@ class basicComputer extends CPU {
     // 순차 카운터의 값을 하나 증가 시키는 과정
     public static void incre_SC(){
         SC = (byte) (SC + 1);
+    }
+
+    public static void show_Memory(int begin, int end){
+        for(int i=begin ; i<end; i++){
+            System.out.println("Memory Idx:" + i + " Value:" + Integer.toHexString(MEMORY[i]));
+        }
     }
 }
